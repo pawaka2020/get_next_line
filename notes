@@ -1,0 +1,17 @@
+allowed functions: 
+read, malloc, free
+
+turn in files:
+get_next_line.c, get_next_line_utils.c,
+get_next_line.h
+
+function prototype:
+char *get_next_line(int fd);
+fd = File descriptor to read from
+
+Return:
+line
+null if nothing or error
+
+https://linux.die.net/man/2/read
+https://my.eng.utah.edu/~cs4400/file-descriptor.pdf
