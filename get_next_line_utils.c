@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: riramli <riramli@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 00:00:00 by kolim             #+#    #+#             */
+/*   Updated: 2021/04/26 00:00:00 by kolim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
-int ft_nlpresent(char *str)
+int	ft_nlpresent(char *str)
 {
 	int	i;
 
@@ -30,9 +42,9 @@ int	ft_strlen(char *s)
 
 char	*ft_append(char *src, char *dst)
 {
-	int	i;
-	int j;
-	char *newbuffer;
+	int		i;
+	int		j;
+	char	*newbuffer;
 
 	i = 0;
 	j = 0;
@@ -51,7 +63,6 @@ char	*ft_append(char *src, char *dst)
 		j++;
 	}
 	newbuffer[i] = '\0';
-	//forgot to free
-	free(src);
+	free (src);
 	return (newbuffer);
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: riramli <riramli@student.42kl.edu.my>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/04/26 00:00:00 by kolim             #+#    #+#             */
+/*   Updated: 2021/04/26 00:00:00 by kolim            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "get_next_line.h"
 
 char	*ft_getrawline(int fd, char *left_str, int size)
@@ -9,7 +21,7 @@ char	*ft_getrawline(int fd, char *left_str, int size)
 	if (!buff)
 		return (0);
 	readres = 1;
-	while (ft_nlpresent(left_str) == 0 && readres !=0 )
+	while (ft_nlpresent(left_str) == 0 && readres != 0)
 	{
 		readres = read(fd, buff, size);
 		if (readres == -1)
@@ -20,21 +32,20 @@ char	*ft_getrawline(int fd, char *left_str, int size)
 		buff[readres] = '\0';
 		left_str = ft_append(left_str, buff);
 	}
-	free(buff);
+	free (buff);
 	return (left_str);
 }
 
 //In case of empty feed, the previous function
 //returns a string of 1 size, but element \0
-char *ft_prenl(char *rawline)
+char	*ft_prenl(char *rawline)
 {
-	int i;
-	int j;
-	char *line;
+	int		i;
+	int		j;
+	char	*line;
 
 	i = 0;
-
-	if(rawline[i] == '\0')
+	if (rawline[i] == '\0')
 		return (0);
 	while (rawline[i] && rawline[i] != '\n')
 		i++;
@@ -42,20 +53,20 @@ char *ft_prenl(char *rawline)
 		i++;
 	line = malloc(i + 1);
 	if (!line)
-		return (0);	
+		return (0);
 	j = -1;
 	while (j++, j != i)
 		line[j] = rawline[j];
 	line[j] = '\0';
-	return(line);
+	return (line);
 }
 
-char *ft_postnl(char *rawline)
+char	*ft_postnl(char *rawline)
 {
-	char *line;
-	int i;
-	int j;
-	
+	char	*line;
+	int		i;
+	int		j;
+
 	if (!rawline)
 		return (0);
 	i = 0;
@@ -70,7 +81,7 @@ char *ft_postnl(char *rawline)
 	while (rawline[i])
 		line[j++] = rawline[i++];
 	line[j] = '\0';
-	free(rawline);
+	free (rawline);
 	return (line);
 }
 
@@ -78,13 +89,9 @@ char	*get_next_line(int fd)
 {
 	char		*line;
 	static char	*rawline;
-	int	size;
-	
-	#ifdef BUFFER_SIZE
-		size = BUFFER_SIZE;
-	#else
-		size = 1;
-	#endif
+	int			size;
+
+	size = BUFFER_SIZE;
 	if (fd < 0 || size <= 0)
 		return (0);
 	rawline = ft_getrawline(fd, rawline, size);
@@ -92,7 +99,6 @@ char	*get_next_line(int fd)
 		return (0);
 	line = ft_prenl(rawline);
 	rawline = ft_postnl(rawline);
-
 	return (line);
 }
 
